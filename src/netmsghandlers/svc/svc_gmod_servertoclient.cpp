@@ -76,7 +76,7 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 			msg.ReadBits(data, toread);
 		}
 
-		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i | data: %s \n", type, bits, data);
+		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i |  id: %d | data: %s \n", type, bits, id, data);
 
 		delete[] data;
 
