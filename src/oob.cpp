@@ -126,7 +126,7 @@ bool OOB::ReceiveQueryPacketGetChallenge(
 
 bool OOB::ReceiveQueryPacketConnection(leychan* chan, Datagram* datagram, bf_read& recvdata)
 {
-	if (chan->connectstep == 0 || chan->connectstep > 10037)
+	if (chan->connectstep == 0 || chan->connectstep > 4)
 		return false;
 
 	chan->connectstep = 4;
