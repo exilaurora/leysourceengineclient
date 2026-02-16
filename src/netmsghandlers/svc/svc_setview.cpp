@@ -16,6 +16,6 @@ bool svc_setview::ParseMessage(leychan* chan, svc_setview* thisptr, bf_read& msg
 {
 	int ent = msg.ReadUBitLong(MAX_EDICT_BITS);
 
-	printf("Received svc_SetView, ent: %i\n", ent);
+	// printf("Received svc_SetView, ent: %i\n", ent);
 	return true;
 }

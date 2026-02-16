@@ -21,7 +21,7 @@ bool svc_getcvarvalue::ParseMessage(leychan* chan, svc_getcvarvalue* thisptr, bf
 	char cvarname[255];
 	msg.ReadString(cvarname, sizeof(cvarname));
 
-	printf("Received svc_GetCvarValue, cookie: %i | name: %s\n", cookie, cvarname);
+	// printf("Received svc_GetCvarValue, cookie: %i | name: %s\n", cookie, cvarname);
 
 	return true;
 }

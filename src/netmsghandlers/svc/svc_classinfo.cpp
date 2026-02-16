@@ -22,7 +22,7 @@ bool svc_classinfo::ParseMessage(leychan* chan, svc_classinfo* thisptr, bf_read&
 
 	if (useclientclasses == 0)
 	{
-		printf("Received svc_ClassInfo | classes: %i: \n", classes);
+		// printf("Received svc_ClassInfo | classes: %i: \n", classes);
 		for (int i = 0; i < classes; i++)
 		{
 			int classid = msg.ReadUBitLong(size);
@@ -36,12 +36,12 @@ bool svc_classinfo::ParseMessage(leychan* chan, svc_classinfo* thisptr, bf_read&
 			if (msg.IsOverflowed())
 				return false;
 
-			printf("Classname: %s | DTname: %s | ClassID: %i\n", classname, dtname, classid);
+			// printf("Classname: %s | DTname: %s | ClassID: %i\n", classname, dtname, classid);
 		}
-		printf("svc_ClassInfo end\n");
+		// printf("svc_ClassInfo end\n");
 	}
 	else {
-		printf("Received svc_ClassInfo, classes: %i\n", classes);
+		// printf("Received svc_ClassInfo, classes: %i\n", classes);
 	}
 
 

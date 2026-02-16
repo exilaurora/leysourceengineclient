@@ -25,7 +25,7 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 
 	if (bits < 0)
 	{
-		printf("Received svc_Gmod_ServerToClient || Invalid!\n");
+		// printf("Received svc_Gmod_ServerToClient || Invalid!\n");
 
 		return true;
 	}
@@ -46,7 +46,7 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 
 
 
-		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i  | id: %i \n", type, bits, id);
+		// printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i  | id: %i \n", type, bits, id);
 
 		delete[] data;
 
@@ -57,7 +57,7 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 	if (type == 3)
 	{
 
-		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
+		// printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
 
 		return true;
 	}
@@ -76,14 +76,15 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 			msg.ReadBits(data, toread);
 		}
 
+		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i | data: %s \n", type, bits, data);
+
 		delete[] data;
 
-		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
 		return true;
 	}
 
 
-	printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
+	// printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
 
 	return true;
 }

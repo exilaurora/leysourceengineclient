@@ -19,7 +19,7 @@ bool svc_voiceinit::ParseMessage(leychan* chan, svc_voiceinit* thisptr, bf_read&
 
 	int quality = msg.ReadByte();
 
-	printf("Received svc_VoiceInit, codec: %s | quality: %i\n", codec, quality);
+	// printf("Received svc_VoiceInit, codec: %s | quality: %i\n", codec, quality);
 
 	return true;
 }

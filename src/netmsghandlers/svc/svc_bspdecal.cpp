@@ -34,7 +34,7 @@ bool svc_bspdecal::ParseMessage(leychan* chan, svc_bspdecal* thisptr, bf_read& m
 
 	int lowpriority = msg.ReadOneBit();
 
-	printf("Received svc_BSPDecal: pos: %f:%f:%f | tex: %i | useent: %i\n", vec.x, vec.y, vec.z, texture, useentity);
+	// printf("Received svc_BSPDecal: pos: %f:%f:%f | tex: %i | useent: %i\n", vec.x, vec.y, vec.z, texture, useentity);
 
 	return true;
 }

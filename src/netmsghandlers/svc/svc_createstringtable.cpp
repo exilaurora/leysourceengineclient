@@ -45,7 +45,7 @@ bool svc_createstringtable::ParseMessage(leychan* chan, svc_createstringtable* t
 	delete[] data;
 
 
-	printf("Received svc_CreateStringTable, name: %s | maxentries: %i | size: %d | entries: %i | compressed: %i\n", name, maxentries, size, entries, compressed);
+	// printf("Received svc_CreateStringTable, name: %s | maxentries: %i | size: %d | entries: %i | compressed: %i\n", name, maxentries, size, entries, compressed);
 
 	return true;
 }

@@ -28,7 +28,7 @@ bool svc_entitymessage::ParseMessage(leychan* chan, svc_entitymessage* thisptr, 
 
 	delete[] data;
 
-	printf("Received svc_EntityMessage, ent: %i | class: %i | bits: %i\n", ent, entclass, bits);
+	// printf("Received svc_EntityMessage, ent: %i | class: %i | bits: %i\n", ent, entclass, bits);
 
 	return true;
 }

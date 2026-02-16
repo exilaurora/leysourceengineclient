@@ -43,7 +43,7 @@ bool svc_packetentities::ParseMessage(leychan* chan, svc_packetentities* thisptr
 
 	delete[] data;
 
-	printf("Received svc_PacketEntities | isdelta: %i | line: %i | changed: %i | bits: %i | update: %i\n", isdelta, baseline, changed, bits, updatebaseline);
+	// printf("Received svc_PacketEntities | isdelta: %i | line: %i | changed: %i | bits: %i | update: %i\n", isdelta, baseline, changed, bits, updatebaseline);
 
 
 	return true;

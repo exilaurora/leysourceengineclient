@@ -18,7 +18,7 @@ bool svc_crosshairangle::ParseMessage(leychan* chan, svc_crosshairangle* thisptr
 	int y = msg.ReadUBitLong(16);
 	int r = msg.ReadUBitLong(16);
 
-	printf("Received svc_CrosshairAngle p: %d y: %d r: %d\n", p, y, r);
+	// printf("Received svc_CrosshairAngle p: %d y: %d r: %d\n", p, y, r);
 
 	return true;
 }
