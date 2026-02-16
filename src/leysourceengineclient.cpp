@@ -395,6 +395,7 @@ int main(int argc, const char* argv[])
 	datagram = new Datagram(&net, serverip.c_str(), serverport);
 	oob = new OOB(&net, serverip.c_str(), serverport);
 
+	SetConsoleOutputCP(CP_UTF8);
 	while (true)
 	{
 		_sleep(1);
