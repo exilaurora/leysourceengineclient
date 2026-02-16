@@ -1,6 +1,6 @@
 name: MSBuild
 
-on: [push]
+on: push
 
 env:
   BUILD_CONFIGURATION: Release
