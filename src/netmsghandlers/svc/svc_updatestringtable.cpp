@@ -5,9 +5,7 @@
 
 bool svc_updatestringtable::Register(leychan* chan)
 {
-	void* voidedfn = static_cast<void*>(&svc_updatestringtable::ParseMessage);
-
-	leychan::netcallbackfn fn = static_cast<leychan::netcallbackfn>(voidedfn);
+	leychan::netcallbackfn fn = reinterpret_cast<leychan::netcallbackfn>(&svc_updatestringtable::ParseMessage);
 
 	return chan->RegisterMessageHandler(this->GetMsgType(), this, fn);
 }

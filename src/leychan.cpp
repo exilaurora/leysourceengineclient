@@ -1,10 +1,13 @@
-#pragma once
-
 //credits to valve for creating CNetChan
 //credits to leystryku for assembling the required pieces for a com & updating those to work with modern ob games
 
 #include <string>
-#include <direct.h>
+#if defined(_WIN32)
+# include <direct.h>
+#else
+# include <sys/stat.h>
+# include <sys/types.h>
+#endif
 #include <vector>
 #include <ctime>
 
@@ -581,8 +584,13 @@ bool leychan::CheckReceivingList(int nList)
 					directory[i] = data->filename[i];
 				}
 
-				int err = _mkdir(directory);
-				if (err)
+				int err = 0;
+#if defined(_WIN32)
+				err = _mkdir(directory);
+#else
+				err = mkdir(directory, 0755);
+#endif
+				if (err != 0)
 				{
 					printf("Could not create dir: %d\n", err);
 				}

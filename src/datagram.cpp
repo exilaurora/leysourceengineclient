@@ -1,6 +1,8 @@
-#pragma once
-
 #include <memory>
+#include <thread>
+#include <chrono>
+#include <cstring>
+#include <cstdio>
 #include "valve/buf.h"
 
 #include "leynet.h"
@@ -53,7 +55,7 @@ bool Datagram::Disconnect(leychan* chan)
 
 bool Datagram::Reconnect(leychan* chan)
 {
-	_sleep(500);
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	printf("Reconnecting..\n");
 
 	chan->Reset();

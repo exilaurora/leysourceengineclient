@@ -1,4 +1,6 @@
-#pragma once
+#include <thread>
+#include <chrono>
+#include <cstring>
 #define STEAMWORKS_CLIENT_INTERFACES
 
 #include "../deps/asyncgetline.h"
@@ -194,7 +196,7 @@ int dosendthinkloading()
 
 
 			datagram->Send(&netchan, true);
-			Sleep(1000);
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 			datagram->Send(&netchan);
 			netchan.connectstep = 7;
 			return 1;
@@ -215,7 +217,7 @@ int dosendthinkloading()
 		netchan.GetSendData()->WriteUBitLong(0, 21);
 
 		datagram->Send(&netchan);
-		Sleep(300);
+		std::this_thread::sleep_for(std::chrono::milliseconds(300));
 		netchan.connectstep = 9;
 		for (int i = 3; i <= 6; i++)
 		{
@@ -225,7 +227,7 @@ int dosendthinkloading()
 			netchan.GetSendData()->WriteLong(netchan.m_iServerCount);
 			datagram->Send(&netchan);
 			netchan.connectstep = 10;
-			Sleep(300);
+			std::this_thread::sleep_for(std::chrono::milliseconds(300));
 		}
 		netchan.m_iSignOnState = 6;
 		netchan.connectstep = 11;
@@ -331,6 +333,12 @@ int dosendthink()
 	return dosendthinkingame(recdiff, &lastrecdiff);
 }
 
+static void setConsoleTitle(const char* title)
+{
+	// ANSI escape sequence to set terminal title on POSIX terminals
+	printf("\033]0;%s\007", title);
+}
+
 void donamethink()
 {
 	int step = netchan.connectstep;
@@ -339,10 +347,10 @@ void donamethink()
 	if (step != 0)
 	{
 		sprintf(buf, "LeySourceEngineClient - Connecting [%d]", step);
-		SetConsoleTitleA(buf);
+		setConsoleTitle(buf);
 	}
 	else {
-		SetConsoleTitle(L"LeySourceEngineClient - Ingame");
+		setConsoleTitle("LeySourceEngineClient - Ingame");
 	}
 }
 
@@ -395,10 +403,10 @@ int main(int argc, const char* argv[])
 	datagram = new Datagram(&net, serverip.c_str(), serverport);
 	oob = new OOB(&net, serverip.c_str(), serverport);
 
-	SetConsoleOutputCP(CP_UTF8);
+	// No-op on POSIX: console output codepage is managed by locale/terminal
 	while (true)
 	{
-		_sleep(1);
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		donamethink();
 		if (dosendthink())
 		{

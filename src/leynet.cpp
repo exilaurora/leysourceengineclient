@@ -1,13 +1,41 @@
 #include "leynet.h"
 
-#include <WinSock2.h>
-#include <WS2tcpip.h>
-#include <string>
+#if defined(_WIN32)
+# include <WinSock2.h>
+# include <WS2tcpip.h>
+#else
+# include <sys/types.h>
+# include <sys/socket.h>
+# include <arpa/inet.h>
+# include <netinet/in.h>
+# include <netdb.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/ioctl.h>
+# include <errno.h>
+# include <cstring>
+# include <cstdio>
+# include <cstdlib>
+# include <ctime>
 
-#define isalpha IsCharAlpha
-#define isupper IsCharUpper
-#define isalnum IsCharAlphaNumeric
-#define tolower CharLower
+// Winsock compatibility
+# define closesocket close
+# define ioctlsocket ioctl
+# define SOCKADDR sockaddr
+# define SOCKADDR_IN sockaddr_in
+# define SOCKET_ERROR -1
+
+typedef struct {
+	int dummy;
+} WSADATA;
+
+static int WSAStartup(unsigned short, WSADATA*) { return 0; }
+static int WSAGetLastError() { return errno; }
+# define MAKEWORD(a,b) (((unsigned short)(a)) | (((unsigned short)(b))<<8))
+
+#endif
+
+#include <string>
 
 char* leynet::HandleError()
 {
@@ -129,7 +157,7 @@ char* leynet_udp::Receive(int* msgsize, unsigned short* port, char* ip, char* bu
 
 	sockaddr_in from;
 
-	int size = sizeof(from);
+	socklen_t size = sizeof(from);
 	int ret = recvfrom(sock, buffer, buffersize, 0, (SOCKADDR*)&from, &size);
 
 	if (ret < 0)
@@ -197,10 +225,10 @@ char* leynet_tcp::Listen(char* ip, unsigned short& lport, unsigned int* ssock)
 
 	sockaddr_in client;
 
-	int len = sizeof(sockaddr_in);
+	socklen_t len = sizeof(sockaddr_in);
 
 
-	unsigned int accepted = (unsigned int)accept(sock, (sockaddr*)&client, &len);
+	int accepted = accept(sock, (sockaddr*)&client, &len);
 
 	if (accepted < 0)
 	{
@@ -208,7 +236,7 @@ char* leynet_tcp::Listen(char* ip, unsigned short& lport, unsigned int* ssock)
 		return 0;
 	}
 
-	*ssock = accepted;
+	*ssock = (unsigned int)accepted;
 
 	inet_ntop(AF_INET, &client.sin_addr, ip, INET_ADDRSTRLEN);
 
@@ -585,15 +613,15 @@ bool leynet_tcp::TLenFin(unsigned int datalen, unsigned int curdatalen, char* bu
 
 	if (timefin)
 	{
-		SYSTEMTIME wintime;
-		GetSystemTime(&wintime);
+		time_t now = time(NULL);
+		struct tm* nowtm = gmtime(&now);
 
 		if (!timefin_s)
 		{
-			timefin_s = wintime.wSecond;
+			timefin_s = nowtm->tm_sec;
 		}
 
-		if (abs(timefin_s - wintime.wSecond) >= timefin)
+		if (abs(timefin_s - nowtm->tm_sec) >= timefin)
 		{
 			lenfin = 0;
 			timefin = 0;
@@ -629,15 +657,15 @@ bool leynet_tcp::THTTPLenFin(unsigned int datalen, unsigned int curdatalen, char
 
 	if (timefin)
 	{
-		SYSTEMTIME wintime;
-		GetSystemTime(&wintime);
+		time_t now = time(NULL);
+		struct tm* nowtm = gmtime(&now);
 
 		if (!timefin_s)
 		{
-			timefin_s = wintime.wSecond;
+			timefin_s = nowtm->tm_sec;
 		}
 
-		if (abs(timefin_s - wintime.wSecond) >= timefin)
+		if (abs(timefin_s - nowtm->tm_sec) >= timefin)
 		{
 			lenfin = 0;
 			timefin = 0;

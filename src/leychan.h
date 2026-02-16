@@ -5,6 +5,12 @@
 #include <vector>
 #include <memory>
 
+#if !defined(_WIN32)
+# ifndef __cdecl
+#  define __cdecl
+# endif
+#endif
+
 #include "valve/datafragments.h"
 #include "valve/subchannel.h"
 #include "leychandefs.h"

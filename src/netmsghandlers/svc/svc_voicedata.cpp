@@ -7,11 +7,68 @@
 
 extern ISteamUser017* temporaryHack;
 
+#if !defined(_WIN32)
+// Minimal stubs for Windows multimedia types/functions so code compiles on POSIX
+typedef void* HWAVEOUT;
+
+typedef struct {
+	unsigned short wFormatTag;
+	unsigned short nChannels;
+	unsigned long nSamplesPerSec;
+	unsigned long nAvgBytesPerSec;
+	unsigned short nBlockAlign;
+	unsigned short wBitsPerSample;
+	unsigned short cbSize;
+} WAVEFORMATEX;
+
+typedef struct {
+	char* lpData;
+	unsigned long dwBufferLength;
+	unsigned long dwFlags;
+	void* dwReserved;
+} WAVEHDR;
+
+static const int CALLBACK_NULL = 0;
+static const int MMSYSERR_NOERROR = 0;
+static const int WAIT_OBJECT_0 = 0;
+
+#define WAVE_FORMAT_PCM 1
+
+static int waveOutOpen(HWAVEOUT* phwo, int device, WAVEFORMATEX* pwfx, unsigned long, unsigned long, int)
+{
+	*phwo = (HWAVEOUT)1; // dummy handle
+	return MMSYSERR_NOERROR;
+}
+
+static int waveOutPrepareHeader(HWAVEOUT, WAVEHDR*, unsigned long)
+{
+	return MMSYSERR_NOERROR;
+}
+
+static int waveOutWrite(HWAVEOUT, WAVEHDR*, unsigned long)
+{
+	return MMSYSERR_NOERROR;
+}
+
+static int waveOutUnprepareHeader(HWAVEOUT, WAVEHDR*, unsigned long)
+{
+	return MMSYSERR_NOERROR;
+}
+
+static int waveOutClose(HWAVEOUT)
+{
+	return MMSYSERR_NOERROR;
+}
+
+static unsigned long WaitForSingleObject(void*, unsigned long)
+{
+	return WAIT_OBJECT_0;
+}
+#endif
+
 bool svc_voicedata::Register(leychan* chan)
 {
-	void* voidedfn = static_cast<void*>(&svc_voicedata::ParseMessage);
-
-	leychan::netcallbackfn fn = static_cast<leychan::netcallbackfn>(voidedfn);
+	leychan::netcallbackfn fn = reinterpret_cast<leychan::netcallbackfn>(&svc_voicedata::ParseMessage);
 
 	return chan->RegisterMessageHandler(this->GetMsgType(), this, fn);
 }

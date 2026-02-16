@@ -5,9 +5,7 @@
 
 bool svc_voiceinit::Register(leychan* chan)
 {
-	void* voidedfn = static_cast<void*>(&svc_voiceinit::ParseMessage);
-
-	leychan::netcallbackfn fn = static_cast<leychan::netcallbackfn>(voidedfn);
+	leychan::netcallbackfn fn = reinterpret_cast<leychan::netcallbackfn>(&svc_voiceinit::ParseMessage);
 
 	return chan->RegisterMessageHandler(this->GetMsgType(), this, fn);
 }

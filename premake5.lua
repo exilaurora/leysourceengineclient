@@ -3,7 +3,8 @@ solution "leysourceengineclient"
    location "project"
    targetdir "build/release"
 
-   flags { "NoMinimalRebuild", "NoBufferSecurityCheck"}
+   minimalrebuild "Off"
+   buffersecuritycheck "Off"
 
    symbols "On"
    optimize "On"
@@ -28,18 +29,23 @@ solution "leysourceengineclient"
    files { "src/**.h", "src/**.cpp" }
 
    libdirs {"libs/"}
-   links { "Shlwapi", "ws2_32", "winmm" }
+
+   if os.istarget("windows") then
+      links { "Shlwapi", "ws2_32", "winmm" }
+   end
 
    -- A project defines one build target
    project "leysourceengineclient"
       targetname "leysourceengineclient"
 
-      configuration "Release"
+      filter "configurations:Release"
          defines { "_CRT_SECURE_NO_WARNINGS", "NDEBUG", "_GENERIC" }
          symbols "Off"
          targetdir "build/release"
 
-      configuration "Debug"
+      filter "configurations:Debug"
          defines { "_CRT_SECURE_NO_WARNINGS", "DEBUG", "_GENERIC" }
          optimize "Off"
          targetdir "build/debug"
+
+      filter {}

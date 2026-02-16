@@ -21,6 +21,10 @@
 #endif
 
 #include <assert.h>
+#ifndef MAX_PATH
+# define MAX_PATH 260
+#endif
+#include <algorithm>
 
 #ifndef Assert
 #define Assert(eval) assert(eval);
@@ -88,7 +92,7 @@ inline void Q_FileBase(const char* in, char* out, int maxlen)
 	// Length of new sting
 	len = end - start + 1;
 
-	int maxcopy = min(len + 1, maxlen);
+	int maxcopy = std::min(len + 1, maxlen);
 
 	// Copy partial string
 	strncpy(out, &in[start], maxcopy);

@@ -14,6 +14,6 @@ public:
 	std::string GetParameterString(const char* param, bool optional = false, std::string defaultvalue = "");
 
 private:
-	bool CommandLine::GetParameterInternal(std::string param, std::string* fill, bool optional = false);
+	bool GetParameterInternal(std::string param, std::string* fill, bool optional = false);
 	std::vector<std::string> args;
 };

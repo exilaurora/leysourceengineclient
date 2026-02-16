@@ -1,6 +1,6 @@
-#pragma once
-
 #include <memory>
+#include <thread>
+#include <chrono>
 #include "valve/buf.h"
 #include "../deps/osw/Steamworks.h"
 #include "../deps/osw/ISteamUser017.h"
@@ -198,10 +198,9 @@ bool OOB::ReceiveQueryPacket(leychan* chan, Datagram* datagram, Steam* steam, bf
 	}
 	case 'B': // S2C_CONNECTION
 	{
-
 		if (this->ReceiveQueryPacketConnection(chan, datagram, recvdata))
 		{
-			Sleep(3000);
+			std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 			return 1;
 		}
 
@@ -273,6 +272,6 @@ bool OOB::SendRequestChallenge(leychan* chan, long ourchallenge)
 
 	udp->SendTo(ip, port, challengepkg, writechallenge.GetNumBytesWritten());
 	chan->connectstep++;
-	Sleep(500);
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	return 1;
 }

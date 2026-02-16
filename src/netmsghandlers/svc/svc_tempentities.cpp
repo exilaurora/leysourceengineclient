@@ -6,9 +6,7 @@
 
 bool svc_tempentities::Register(leychan* chan)
 {
-	void* voidedfn = static_cast<void*>(&svc_tempentities::ParseMessage);
-
-	leychan::netcallbackfn fn = static_cast<leychan::netcallbackfn>(voidedfn);
+	leychan::netcallbackfn fn = reinterpret_cast<leychan::netcallbackfn>(&svc_tempentities::ParseMessage);
 
 	return chan->RegisterMessageHandler(this->GetMsgType(), this, fn);
 }

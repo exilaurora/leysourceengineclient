@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2007, Valve Corporation, All rights reserved. ============//
+//========= Copyright ï¿½ 1996-2007, Valve Corporation, All rights reserved. ============//
 //
 //	LZSS Codec. Designed for fast cheap gametime encoding/decoding. Compression results
 //	are	not aggresive as other alogrithms, but gets 2:1 on most arbitrary uncompressed data.
@@ -6,6 +6,7 @@
 //=====================================================================================//
 
 #include "clzss.h"
+#include <cstdint>
 
 /*
 #if _DEBUG
@@ -18,10 +19,10 @@
 template <typename T>
 inline T WordSwapC(T w)
 {
-	uint16 temp;
+	uint16_t temp;
 
-	temp = ((*((uint16 *)&w) & 0xff00) >> 8);
-	temp |= ((*((uint16 *)&w) & 0x00ff) << 8);
+	temp = ((*((uint16_t *)&w) & 0xff00) >> 8);
+	temp |= ((*((uint16_t *)&w) & 0x00ff) << 8);
 
 	return *((T*)&temp);
 }
@@ -29,12 +30,12 @@ inline T WordSwapC(T w)
 template <typename T>
 inline T DWordSwapC(T dw)
 {
-	uint32 temp;
+	uint32_t temp;
 
-	temp = *((uint32 *)&dw) >> 24;
-	temp |= ((*((uint32 *)&dw) & 0x00FF0000) >> 8);
-	temp |= ((*((uint32 *)&dw) & 0x0000FF00) << 8);
-	temp |= ((*((uint32 *)&dw) & 0x000000FF) << 24);
+	temp = *((uint32_t *)&dw) >> 24;
+	temp |= ((*((uint32_t *)&dw) & 0x00FF0000) >> 8);
+	temp |= ((*((uint32_t *)&dw) & 0x0000FF00) << 8);
+	temp |= ((*((uint32_t *)&dw) & 0x000000FF) << 24);
 
 	return *((T*)&temp);
 }

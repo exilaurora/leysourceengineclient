@@ -1,12 +1,14 @@
-#pragma once
-
 #include <string>
+#include <cstring>
+#include <iostream>
 
 #include "valve/buf.h"
 #include "../deps/asyncgetline.h"
 
 #include "datagram.h"
 #include "leychan.h"
+
+using std::cout;
 
 void processcmdline(Datagram* datagram, leychan* netchan, std::string sinput)
 {

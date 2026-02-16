@@ -5,9 +5,7 @@
 
 bool net_tick::Register(leychan* chan)
 {
-	void* voidedfn = static_cast<void*>(&net_tick::ParseMessage);
-
-	leychan::netcallbackfn fn = static_cast<leychan::netcallbackfn>(voidedfn);
+	leychan::netcallbackfn fn = reinterpret_cast<leychan::netcallbackfn>(&net_tick::ParseMessage);
 
 	return chan->RegisterMessageHandler(this->GetMsgType(), this, fn);
 }

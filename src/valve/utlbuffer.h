@@ -411,7 +411,17 @@ protected:
 	UtlBufferOverflowFunc_t m_GetOverflowFunc;
 	UtlBufferOverflowFunc_t m_PutOverflowFunc;
 
-	//	CByteswap	m_Byteswap;
+	// Minimal CByteswap stub to support byte-swapping APIs on non-Windows platforms
+	class CByteswap
+	{
+	public:
+		bool IsSwappingBytes() const { return false; }
+
+		template <typename T>
+		void SwapFieldsToTargetEndian(T* dest, T* src) { /* no-op on little-endian hosts */ }
+	};
+
+	CByteswap m_Byteswap;
 };
 
 

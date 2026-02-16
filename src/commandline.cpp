@@ -1,5 +1,5 @@
-
-#include <Shlwapi.h>
+#include <cstdio>
+#include <cstdlib>
 #include <string>
 
 #include "../deps/osw/Steamworks.h"
