@@ -15,6 +15,8 @@ sudo pacman -Syu
 ```sh
 sudo pacman -S --needed base-devel git
 sudo pacman -S --needed lib32-mesa lib32-libxrandr lib32-libxi lib32-libxrender lib32-libxtst lib32-openal lib32-pulse lib32-libx11
+
+sudo pacman -S lib32-libxrandr lib32-libxi lib32-libxrender lib32-libxtst lib32-openal lib32-pulseaudio
 ```
 
 3) Install Steam (provides `steamclient.so` and runtime libs):
