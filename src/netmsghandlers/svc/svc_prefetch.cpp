@@ -15,7 +15,7 @@ bool svc_prefetch::ParseMessage(leychan* chan, svc_prefetch* thisptr, bf_read& m
 {
 	int index = msg.ReadUBitLong(4);
 
-	// printf("Received svc_Prefetch, index: %i\n", index);
+	printf("Received svc_Prefetch, index: %i\n", index);
 
 	return true;
 }

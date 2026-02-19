@@ -15,8 +15,8 @@ bool svc_print::ParseMessage(leychan* chan, svc_print* thisptr, bf_read& msg)
 
 	char print[2048];
 	msg.ReadString(print, sizeof(print));
-	// printf("svc_Print:\n");
-	// printf("%s", print);
+	printf("svc_Print:\n");
+	printf("%s", print);
 
 	return true;
 }

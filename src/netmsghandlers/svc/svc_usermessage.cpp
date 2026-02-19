@@ -39,7 +39,7 @@ bool svc_usermessage::ParseMessage(leychan* chan, svc_usermessage* thisptr, bf_r
 		int something4 = userMsg.ReadByte(); //seems to be 1 when teamchatting
 		int something5 = userMsg.ReadByte(); //idk, sometimes 1
 
-		// printf("Chat message: %i:%s __ %i\n", client, readstr, userMsg.GetNumBytesLeft());
+		printf("Chat message: %i:%s __ %i\n", client, readstr, userMsg.GetNumBytesLeft());
 
 		delete[] data;
 		return true;
@@ -51,7 +51,18 @@ bool svc_usermessage::ParseMessage(leychan* chan, svc_usermessage* thisptr, bf_r
 		char readstr[MAX_USER_MSG_DATA];
 		userMsg.ReadString(readstr, sizeof(readstr));
 
-		// printf("umsg print: %s\n", readstr);
+		printf("umsg print: %s\n", readstr);
+	}
+
+	if (msgtype == 40) // SendLua
+	{
+		int a = userMsg.ReadUBitLong(32);
+		int b = userMsg.ReadByte();
+
+		printf("SendLua Received. bits: %i | data: %s\n", bits, data);
+
+		delete[] data;
+		return true;
 	}
 
 	if (msgtype == 44)//nwvar
@@ -65,7 +76,7 @@ bool svc_usermessage::ParseMessage(leychan* chan, svc_usermessage* thisptr, bf_r
 		char str2[255];
 		userMsg.ReadString(str2, sizeof(str2));
 
-		//// printf("a:%i b: %i name: %s str2: %s | left: %i\n", a, b, str, str2,  userMsg.GetNumBytesLeft());
+		//printf("a:%i b: %i name: %s str2: %s | left: %i\n", a, b, str, str2,  userMsg.GetNumBytesLeft());
 
 		delete[] data;
 		return true;
@@ -73,7 +84,7 @@ bool svc_usermessage::ParseMessage(leychan* chan, svc_usermessage* thisptr, bf_r
 
 	delete[] data;
 
-	// printf("Received svc_UserMessage, type: %i | bits: %i\n", msgtype, bits);
+	printf("Received svc_UserMessage, type: %i | bits: %i\n", msgtype, bits);
 
 	return true;
 }

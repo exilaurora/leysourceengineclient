@@ -34,7 +34,7 @@ bool svc_sounds::ParseMessage(leychan* chan, svc_sounds* thisptr, bf_read& msg)
 
 	delete[] data;
 
-	// // printf("Received svc_Sounds, reliable: %i, bits: %i, num: %i\n", reliable, bits, num);
+	// printf("Received svc_Sounds, reliable: %i, bits: %i, num: %i\n", reliable, bits, num);
 
 	return true;
 }

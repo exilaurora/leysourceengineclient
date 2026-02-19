@@ -1,3 +1,13 @@
+#pragma once
+
+/**
+ * @file valve/utlbuffer.h
+ * @brief Утилиты для работы с буфером (CUtlBuffer) — сериализация/парсинг.
+ *
+ * Файл содержит класс `CUtlBuffer` и вспомогательные структуры для
+ * чтения/записи данных в текстовом и бинарном представлении.
+ */
+
 //========= Copyright Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 

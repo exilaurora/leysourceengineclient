@@ -23,7 +23,7 @@
 #define _ShouldChecksumPackets true
 #define _showdrop true
 #define _showalldrop false
-#define _showfragments true
+#define _showfragments false
 #define _maxpacketdrop 0
 #define _log_packetheaders false
 
@@ -409,7 +409,7 @@ bool leychan::ReadSubChannelData(bf_read& buf, int stream)
 		offset = startFragment * FRAGMENT_SIZE;
 		length = numFragments * FRAGMENT_SIZE;
 
-		// printf("CURBIT: %i _ LEN: %i _ OFFSET: %i\n", buf.m_iCurBit, numFragments, offset);
+		printf("CURBIT: %i _ LEN: %i _ OFFSET: %i\n", buf.m_iCurBit, numFragments, offset);
 	}
 
 
@@ -823,7 +823,7 @@ int leychan::HandleSplitPacket(char* netrecbuffer, int& msgsize, bf_read& recvda
 
 	int offset = (packetNumber * nSplitSizeMinusHeader);
 
-	// printf("leychan::HandleSplitPacket: %i _ %i _ %i:%i | OFFSET: %i\n", sequenceNumber, packetID, packetNumber, packetCount, offset);
+	printf("leychan::HandleSplitPacket: %i _ %i _ %i:%i | OFFSET: %i\n", sequenceNumber, packetID, packetNumber, packetCount, offset);
 
 	if (offset > SPLITBUFFER_SIZE || offset + msgsize > SPLITBUFFER_SIZE)
 	{

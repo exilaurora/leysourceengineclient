@@ -13,7 +13,7 @@ bool svc_setpause::Register(leychan* chan)
 bool svc_setpause::ParseMessage(leychan* chan, svc_setpause* thisptr, bf_read& msg)
 {
 	int state = msg.ReadOneBit();
-	// printf("Received svc_SetPause, state: %i\n", state);
+	printf("Received svc_SetPause, state: %i\n", state);
 
 	return true;
 }

@@ -25,7 +25,7 @@ bool svc_tempentities::ParseMessage(leychan* chan, svc_tempentities* thisptr, bf
 
 	delete[] data;
 
-	// printf("Received svc_TempEntities, num: %i | bits: %i\n", num, bits);
+	printf("Received svc_TempEntities, num: %i | bits: %i\n", num, bits);
 
 	return true;
 }

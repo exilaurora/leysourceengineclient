@@ -22,7 +22,7 @@ bool svc_gameeventlist::ParseMessage(leychan* chan, svc_gameeventlist* thisptr, 
 	char* data = new char[bits];
 	msg.ReadBits(data, bits);
 
-	// printf("Received svc_GameEventList, num: %i | bits: %i\n", num, bits);
+	printf("Received svc_GameEventList, num: %i | bits: %i\n", num, bits);
 
 	delete[] data;
 

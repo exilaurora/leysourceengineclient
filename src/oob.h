@@ -5,6 +5,14 @@
 #endif
 
 
+/**
+ * @file oob.h
+ * @brief Обработка out-of-band (OOB) сообщений (запросы/ответы вне основного канала).
+ *
+ * OOB-пакеты используются для discovery/handshake и простых запросов к серверу
+ * без установки полноценного сетевого канала.
+ */
+
 class leychan;
 class leynet_udp;
 class Datagram;
@@ -13,6 +21,7 @@ class Steam;
 extern unsigned long serverchallenge;
 extern unsigned long _ourchallenge;
 
+/** Класс для работы с OOB-пакетами (приём, отправка, парсинг запросов). */
 class OOB
 {
 private:

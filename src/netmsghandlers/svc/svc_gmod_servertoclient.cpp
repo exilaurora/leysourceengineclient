@@ -4,6 +4,8 @@
 #include "../../vector.h"
 #include "svc_gmod_servertoclient.h"
 
+#include "../../luahandler.h"
+
 bool svc_gmod_servertoclient::Register(leychan* chan)
 {
 	leychan::netcallbackfn fn = reinterpret_cast<leychan::netcallbackfn>(&svc_gmod_servertoclient::ParseMessage);
@@ -23,7 +25,7 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 
 	if (bits < 0)
 	{
-		// printf("Received svc_Gmod_ServerToClient || Invalid!\n");
+		printf("Received svc_Gmod_ServerToClient || Invalid!\n");
 
 		return true;
 	}
@@ -44,7 +46,7 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 
 
 
-		// printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i  | id: %i \n", type, bits, id);
+		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i  | id: %i \n", type, bits, id);
 
 		delete[] data;
 
@@ -55,7 +57,7 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 	if (type == 3)
 	{
 
-		// printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
+		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
 
 		return true;
 	}
@@ -74,7 +76,9 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 			msg.ReadBits(data, toread);
 		}
 
-		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i |  id: %d | data: %s \n", type, bits, id, data);
+		printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i |  id: %d\n", type, bits, id);
+
+		NetHandler(chan, msg, id, data);
 
 		delete[] data;
 
@@ -82,7 +86,7 @@ bool svc_gmod_servertoclient::ParseMessage(leychan* chan, svc_gmod_servertoclien
 	}
 
 
-	// printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
+	printf("Received svc_GMod_ServerToClient, type: %i |  bits: %i\n", type, bits);
 
 	return true;
 }

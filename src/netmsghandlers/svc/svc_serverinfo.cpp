@@ -48,7 +48,7 @@ bool svc_serverinfo::ParseMessage(leychan* chan, svc_serverinfo* thisptr, bf_rea
 	if (msg.IsOverflowed())
 		return false;
 
-	// printf("ServerInfo, players: %lu/%lu | map: %s | name: %s | gm: %s | count: %i | left: %i\n", players, maxplayers, levelname, hostname, gamemode, servercount, msg.GetNumBitsLeft());
+	printf("ServerInfo, players: %lu/%lu | map: %s | name: %s | gm: %s | count: %i | left: %i\n", players, maxplayers, levelname, hostname, gamemode, servercount, msg.GetNumBitsLeft());
 
 	chan->ProcessServerInfo(protoversion, servercount);
 

@@ -23,6 +23,6 @@ bool svc_gameevent::ParseMessage(leychan* chan, svc_gameevent* thisptr, bf_read&
 
 	delete[] data;
 
-	// printf("Received svc_GameEvent, bits: %i\n", bits);
+	printf("Received svc_GameEvent, bits: %i\n", bits);
 	return true;
 }

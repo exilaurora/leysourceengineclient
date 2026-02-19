@@ -170,7 +170,8 @@ void CLZSS::BuildHash( unsigned char *pData )
 	lzss_list_t *pList;
 	lzss_node_t *pTarget;
 
-	int targetindex = (unsigned int)pData & ( m_nWindowSize - 1 );
+	// Cast pointer to an integer-sized type safely (use uintptr_t) before masking
+	int targetindex = (int)(((uintptr_t)pData) & ( m_nWindowSize - 1 ));
 	pTarget = &m_pHashTarget[targetindex];
 	if ( pTarget->pData )
 	{

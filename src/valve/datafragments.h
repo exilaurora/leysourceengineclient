@@ -1,3 +1,6 @@
+// @file valve/datafragments.h
+// @brief Структура хранения информации о фрагментах передачи данных.
+
 #include "../leychandefs.h"
 
 typedef struct dataFragments_s

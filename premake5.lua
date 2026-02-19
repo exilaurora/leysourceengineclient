@@ -17,6 +17,17 @@ solution "leysourceengineclient"
       linkoptions  {"-m32 -fPIC -ldl -lstdc++"}
    end
 
+   -- Use pkg-config to obtain lua flags and libs
+   local lua_cflags = os.outputof("pkg-config --cflags lua"):gsub("\n"," ")
+   local lua_libs   = os.outputof("pkg-config --libs lua"):gsub("\n"," ")
+
+   if lua_cflags ~= "" then
+      buildoptions { lua_cflags }
+   end
+   if lua_libs ~= "" then
+      linkoptions { lua_libs }
+   end
+
    vpaths {
       ["Header Files/*"] = "src/**.h",
       ["Source Files/*"] = "src/**.cpp",

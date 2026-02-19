@@ -2,6 +2,16 @@
 //credits to valve for creating CNetChan
 //credits to leystryku for assembling the required pieces for a com & updating those to work with modern ob games
 
+/**
+ * @file leychan.h
+ * @brief Канал сети высокого уровня (аналог Valve CNetChan).
+ *
+ * Класс `leychan` реализует обработку сетевых сообщений, разбиение
+ * и сборку фрагментов, управление надёжностью и очередями приема/отправки.
+ * Здесь определены структуры для работы с фрагментами данных, сабканалами
+ * и механизмами регистрации обработчиков сообщений.
+ */
+
 #include <vector>
 #include <memory>
 
@@ -28,6 +38,14 @@
 class bf_read;
 class bf_write;
 
+/**
+ * @class leychan
+ * @brief Основной класс сетевого канала.
+ *
+ * Отвечает за приём/обработку пакетов, управление фрагментированными
+ * сообщениями, регистрацию обработчиков и вспомогательные утилиты
+ * (CRC, сжатие/распаковка и т.д.).
+ */
 class leychan
 {
 public:

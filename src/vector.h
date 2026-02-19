@@ -1,5 +1,12 @@
 #pragma once
 
+/**
+ * @file vector.h
+ * @brief Простая структура 3D-вектора и вспомогательные операции.
+ *
+ * Используется для хранения координат и углов (typedef QAngle).
+ */
+
 struct Vector
 {
 	float x, y, z;
@@ -22,6 +29,7 @@ struct Vector
 		z = c;
 	}
 
+	/** Установить вектор в (0,0,0). */
 	inline void Zero()
 	{
 		x = 0;
@@ -29,6 +37,7 @@ struct Vector
 		z = 0;
 	}
 
+	/** Инициализировать компоненты вектора. */
 	inline void Init(float a, float b, float c)
 	{
 		x = a;

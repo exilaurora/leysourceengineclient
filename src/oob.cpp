@@ -221,7 +221,7 @@ bool OOB::ReceiveQueryPacket(leychan* chan, Datagram* datagram, Steam* steam, bf
 
 bool OOB::HandleSplitPacket(leychan* chan, bf_read& recvdata, char* netrecbuffer, int msgsize, long* header)
 {
-	// printf("OOB::HandleSplitPacket\n");
+	printf("OOB::HandleSplitPacket\n");
 
 	if (chan->HandleSplitPacket(netrecbuffer, msgsize, recvdata))
 	{
@@ -234,7 +234,7 @@ bool OOB::HandleSplitPacket(leychan* chan, bf_read& recvdata, char* netrecbuffer
 
 bool OOB::HandleCompressedPacket(leychan* chan, bf_read& recvdata, char* netrecbuffer, int msgsize)
 {
-	// printf("OOB:HandleCompressedPacket\n");
+	printf("OOB:HandleCompressedPacket\n");
 	if (5 > msgsize)
 	{
 		return false;

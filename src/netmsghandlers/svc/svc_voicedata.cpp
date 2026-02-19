@@ -82,7 +82,7 @@ bool svc_voicedata::ParseMessage(leychan* chan, svc_voicedata* thisptr, bf_read&
 	if (msg.GetNumBitsLeft() < bits)
 		bits = msg.GetNumBitsLeft();
 
-	// // printf("Received svc_VoiceData, client: %i | proximity: %i | bits: %i\n", client, proximity, bits);
+	// printf("Received svc_VoiceData, client: %i | proximity: %i | bits: %i\n", client, proximity, bits);
 
 
 
@@ -119,7 +119,7 @@ void svc_voicedata::PlaybackAudio(char* voiceData, int lengthInBits)
 
 	if (worked != EVoiceResult::k_EVoiceResultOK)
 	{
-		// printf("svc_voicedata: PlayBack failed: %d\n", worked);
+		printf("svc_voicedata: PlayBack failed: %d\n", worked);
 		return;
 	}
 
@@ -145,7 +145,7 @@ void svc_voicedata::PlaybackAudio(char* voiceData, int lengthInBits)
 
 	if (waveOutOpen(&hWaveOut, 0, swfx, 0, 0, CALLBACK_NULL))
 	{
-		// printf("svc_voicedata:: Opening Audio out failed\n");
+		printf("svc_voicedata:: Opening Audio out failed\n");
 		return;
 	}
 
@@ -164,7 +164,7 @@ void svc_voicedata::PlaybackAudio(char* voiceData, int lengthInBits)
 
 		if (writeret != MMSYSERR_NOERROR)
 		{
-			// printf("svc_voicedata:: failed writing audio %d\n", writeret);
+			printf("svc_voicedata:: failed writing audio %d\n", writeret);
 		}
 		else {
 			if (WaitForSingleObject(hWaveOut, 3000) != WAIT_OBJECT_0)

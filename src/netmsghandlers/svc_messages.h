@@ -1,3 +1,10 @@
+#pragma once
+
+/**
+ * @file svc_messages.h
+ * @brief Сборный заголовок для сервисных (svc) сообщений от сервера.
+ */
+
 #include "svc/svc_print.h"
 #include "svc/svc_serverinfo.h"
 #include "svc/svc_classinfo.h"

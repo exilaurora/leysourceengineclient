@@ -1,6 +1,14 @@
 #define PAD_NUMBER(number, boundary) \
 	( ((number) + ((boundary)-1)) / (boundary) ) * (boundary)
 
+/*
+ * @file leychandefs.h
+ * @brief Конфигурационные макросы и константы для сетевого канала.
+ *
+ * Здесь определены размеры буферов, флаги пакетов, параметры фрагментации
+ * и другие константы, используемые leychan и связанными модулями.
+ */
+
 #define NET_HEADER_FLAG_QUERY					-1
 #define NET_HEADER_FLAG_SPLITPACKET				-2
 #define NET_HEADER_FLAG_COMPRESSEDPACKET		-3

@@ -30,10 +30,10 @@ bool svc_updatestringtable::ParseMessage(leychan* chan, svc_updatestringtable* t
 
 	msg.ReadBits(data, bits);
 
+	printf("Received svc_UpdateStringTable, id: %i | changed: %i | bits: %i\n", tableid, changed, bits);
+
+
 	delete[] data;
-
-
-	// printf("Received svc_UpdateStringTable, id: %i | changed: %i | bits: %i\n", tableid, changed, bits);
 
 	return true;
 }
